@@ -6,6 +6,7 @@ import sqlalchemy
 import random
 import logging
 from Initialisations.loggingConf import logging
+
 '''
 Created on 15 oct. 2014
 @author: kitsune
@@ -15,6 +16,13 @@ Created on 15 oct. 2014
 Attributs=[('g', "genre"),('ar', "artiste"),('sg', "sousgenre"),('alb', "album"),('t', "titre")]
 
 def rechercheBase(Attributs, valeurRechercher, arg):
+    '''
+    On recherche dans la base les morceaux correspondant à un argument et a sa valeur
+    @param Attributs: ensemble des arguments possibles de la ligne de commande (ex: ('g', "genre"),('ar', "artiste"))
+    @param valeurRechercher:valeur saisie par l'utilisateur pour un argument (ex: Rock)
+    @param arg: l'argument pour lequel on recherche la valeur (ex: g)
+    @return: une liste de morceaux qui corresponde a un argument de la ligne de commande
+    '''
 
     #Initialisation d'un compteur pour parcourir la liste des arguments
     i = 0
@@ -37,8 +45,13 @@ def rechercheBase(Attributs, valeurRechercher, arg):
         i += 1
     return playList
 
-#Fonction qui permet de recherche dans la base de données si la valeur voulu d'un argument existe
 def verificationChoisi(selection, arg):
+    '''
+    Fonction qui permet de recherche dans la base de donnees si la valeur voulu d'un argument existe
+    @param selection: valeur saisie par l'utilisateur pour un argument (ex: Rock)
+    @param arg: l'argument pour lequel on recherche la valeur (ex: g)
+    @return: un boolean qui permet de savoir si on a trouvé des morceaux ou non
+    '''
 
     #On recherche dans la base
     select = rechercheBase(Attributs, selection, arg)
@@ -53,11 +66,22 @@ def verificationChoisi(selection, arg):
 
 #Module qui permet de recuperer une liste de morceaux selon les arguments de la commande
 def recuperationDonnees(argumentsParser, existe):
+    '''
+    Fonction qui permet de recuperer une liste de morceaux selon les arguments de la ligne de commande
+    @param argumentsParser: arguments saisie dans la ligne de commande
+    @param existe: boolean qui permet de savoir s'il y a des arguments optionnels ou non
+    @return une liste de liste qui contiendra l'ensemble des morceaux voulus pour chaque argument
+    '''
 
-    #Permet de choisir dans la liste de morceaux ceux qui va correspondre à la durée demande
     def filtrerListe(listeFinale, listeAFiltrer, quantiteEscomptee):
+        '''
+        Permet de choisir dans la liste de morceaux ceux qui va correspondre a la duree demande
+        @param listeFinale: liste final correspondant à la quantite de morceaux voulus
+        @param listeAFiltrer: la liste de morceaux de depart qui correspond à un argument
+        @return: la listeFinale  
+        '''
 
-        #Si la quantite demander est superieur a 0'''
+        #Si la quantite demander est superieur a 0
         if quantiteEscomptee > 0:
             #On range le dernier morceaux de la playlist dans la liste final et on la supprime de l'ensemble
             morceauChoisi = listeAFiltrer[0]

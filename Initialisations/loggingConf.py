@@ -3,7 +3,7 @@ import logging
 
 '''
 Created on 14 oct. 2014
-
+Definition du fichier de log de la playlist
 @author: kitsune
 '''
 #Définition du fichier de log de la playlist

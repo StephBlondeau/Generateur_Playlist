@@ -11,47 +11,56 @@ Attributs = ['g','ar','sg','alb','t','r']
 
 '''
 Created on 8 oct. 2014
-
+Verification des arguments saisies par l'utilisateur
 @author: kitsune, Fx
 '''
 
-#Fonction qui permet de verifier si l'utilisateur a bien saisie un entier pour une quantite voulue
+
 def VerifInt (quantity):
+    '''
+    Verifie si la quantite saisie pour un argument est un entier naturel
+    @param quantity: nombre saisie par l'utilisateur pour un argument
+    '''
 
-        #On essais de convertir le format de la saisie en entier
-        try:
-            #Convertion de la saisie
-            goodQte = int(quantity)
-            logging.info("Un entier a bien ete saisie.")
+    #On essais de convertir le format de la saisie en entier
+    try:
+        #Convertion de la saisie
+        goodQte = int(quantity)
+        logging.info("Un entier a bien ete saisie.")
 
-            #Si la quantite saisie est un entier naturel
-            if goodQte > 0:
-                logging.info("L'entier saisie est bien positif.")
-                #On retourne la saisie convertie en entier
+        #Si la quantite saisie est un entier naturel
+        if goodQte > 0:
+            logging.info("L'entier saisie est bien positif.")
+            #On retourne la saisie convertie en entier
+            return goodQte
+
+            #Sinon (inferieur ou egale a 0) on regarde s'il est egale a 0
+        elif goodQte == 0:
+            #Si c'est le cas on renvoie en erreur et le programme s'arrete
+            logging.error("0 a ete saisie.")
+            print('Veuillez saisir un nombre non nul.')
+            exit(2)
+
+            #Dans le dernier cas (strictement inferieur a 0)
+        else:
+                #On convertie le negatif en positif
+                goodQte = abs(goodQte)
+                logging.info("L'entier saisie est negatif, la saisie a ete transformer donc en entier positif.")
                 return goodQte
+                #On retroune maintenant un entier naturel
+    except ValueError:
+        #Si le programme n'a pas reussi a convertir la saisie en entier (il s'agit donc de caracteres ou caracteres speciaux
+        logging.error("Erreur de conversion,la saisie est une chaine.")
+        print("Il y a une erreur, veuillez saisir un entier naturel.")
+        exit(1)
 
-                #Sinon (inferieur ou egale a 0) on regarde s'il est egale a 0
-            elif goodQte == 0:
-                #Si c'est le cas on renvoie en erreur et le programme s'arrete
-                logging.error("0 a ete saisie.")
-                print('Veuillez saisir un nombre non nul.')
-                exit(2)
 
-                #Dans le dernier cas (strictement inferieur a 0)
-            else:
-                    #On convertie le negatif en positif
-                    goodQte = abs(goodQte)
-                    logging.info("L'entier saisie est negatif, la saisie a ete transformer donc en entier positif.")
-                    return goodQte
-                    #On retroune maintenant un entier naturel
-        except ValueError:
-            #Si le programme n'a pas reussi a convertir la saisie en entier (il s'agit donc de caracteres ou caracteres speciaux
-            logging.error("Erreur de conversion,la saisie est une chaine.")
-            print("Il y a une erreur, veuillez saisir un entier naturel.")
-            exit(1)
-
-#Fonction qui permet la verification de tout les quantites de chaque arguments saisies
 def Veriff (Attributs):
+    '''
+    Fonction qui permet la verification de tout les quantites de chaque arguments saisies
+    @param Attributs: la liste des arguments possibles de la ligne de commande 
+    @return: un boolean trouveArg qui permet de savoir si on a trouve au moin un argument optionnel saisie par l'utilisateur
+    '''
 
     #On initialise le pourcentage total de la playlist#
     pourcentage = 0
@@ -108,9 +117,9 @@ def Veriff (Attributs):
 
                     #On regarde si la valeur retourner
                     if (trouveBase == False):
-                        logging.error("La demande "+ Argument[0]+ " pour l'argument "+arg+" n'a pas dans la base.")
+                        logging.error("La demande "+ Argument[0]+ " pour l'argument "+arg+" n'ai pas dans la base.")
                         #Si c'est faux on affiche un message d'erreur a l'utilisateur
-                        print("Votre demande "+ Argument[0]+ " pour l'argument "+arg+" n'a pas dans la base.")
+                        print("Votre demande "+ Argument[0]+ " pour l'argument "+arg+" n'ai pas dans la base.")
                         #On quitte le programme
                         exit(3)
                         
@@ -166,9 +175,13 @@ def Veriff (Attributs):
                         i=i+1
     return trouveArg
 
-#Fonction qui permet de calculer un taux de remise a l'echelle selon le pourcentage total qui lui est transmis
 def pourcentages (pourcentage):
-
+    '''
+    Fonction qui permet de calculer un taux de remise a l'echelle selon la pourcentage total qui lui est transmis
+    @param pourcentage : total des quantites voulue pour la playlist
+    @return: un decimal qui represente le taux de remise a l'echelle a appliquer a toute les quantites
+    '''
+    
     #On regarde si le pourcentage est different de 100 donc non correcte
     if pourcentage != 100:
 
@@ -189,8 +202,12 @@ def pourcentages (pourcentage):
         proportion = 0
         return proportion
 
-#Fonction qui permet de convertir un entier (pourcentage) en minutes
 def conversionMinutes(ArgumentEntier):
+    '''
+    fonction qui permet de convertir un entier (pourcentage d'un argument voulue) en minutes
+    @param ArgumentEntier: pourcentage d'un argument en entier naturel (donc deja verifie) 
+    @return: un entier , le pourcentage est convertie en minutes.
+    '''
     #On convertie le pourcentage en minutes selon la duree de la playlist
     Conversion = int (argumentsParser.duree_playlist*ArgumentEntier/100)
     return Conversion

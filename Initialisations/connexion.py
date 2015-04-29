@@ -1,3 +1,9 @@
+'''
+Created on 8 oct. 2014
+Connexion à la base Postgresql
+@author: kitsune, Fx
+'''
+
 import sqlalchemy
 from Initialisations import loginMdpBdd as logBDD
 

@@ -6,16 +6,20 @@ import controles.playlistFormat
 from controles.playlistFormat import writeM3U, writeXSPF
 import random
 
-#Liste des arguments du programme
+
 Attributs=['g','ar','sg','alb','t']
+#Liste des arguments du programme
 
-#On execute la requete qui va lancer le controle des saisies (argument et entier) de l'utilisateur
+
 recupArg = Veriff(Attributs)
+#On execute la requete qui va lancer le controle des saisies (argument et entier) de l'utilisateur
 
-#On recupere la playlist des morceaux trier selon les arguments demander par l'utilisateur
+
 playlist = recuperationDonnees(argumentsParser,recupArg)
-#On mélange la playlist
+#On recupere la playlist des morceaux trier selon les arguments demander par l'utilisateur
+
 random.shuffle(playlist)
+#On mélange la playlist
 
 if (argumentsParser.type_playlist =='m3u'):
     writeM3U(argumentsParser, playlist)

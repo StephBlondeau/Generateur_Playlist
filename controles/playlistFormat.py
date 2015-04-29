@@ -2,10 +2,13 @@
 
 import os
 
-#Fonction qui permet de generer une playliste au format m3u
+#Fonction qui permet de generer une playlist au format m3u
 def writeM3U(argumentsParser, playlist):
-
-    #argumentsParser contient le nom et le type de saisie voulue
+    '''
+    Fonction qui permet de generer une playlist au format m3u.
+    @param argumentsParser:contient les informations principales de la playlist (duree, type et nom de la playlist).
+    @param playlist: contient un ensemble de morceaux qui correspond a la demande de l'utilisateur. 
+    '''
 
     #On applique le nom de la playlist pour le nom du fichier de la playlist
     #On creer le fichier et on lui donne les droits d'ecriture
@@ -19,9 +22,15 @@ def writeM3U(argumentsParser, playlist):
     #On ferme le fichier de playlist
     playlistFile.close()
 
-#Fonction qui permet de generer une playliste au format xspf
+#Fonction qui permet de generer une playlist au format xspf
 def writeXSPF(argumentsParser, playlist):
 
+    '''
+    Fonction qui permet de generer une playlist au format xspf.
+    @param argumentsParser:contient les informations principales de la playlist (duree, type et nom de la playlist).
+    @param playlist: contient un ensemble de morceaux qui correspond a la demande de l'utilisateur. 
+    '''
+    
     #Creation d'un fichier
     playlistFileName = argumentsParser.nom_playlist +"."+ argumentsParser.type_playlist
     playlistFile = open(playlistFileName, 'w')
@@ -43,6 +52,11 @@ def writeXSPF(argumentsParser, playlist):
 
 #Fonction qui permet de generer une playliste au format pls
 def writePLS(argumentsParser, playlist):
+    '''
+    Fonction qui permet de generer une playlist au format pls.
+    @param argumentsParser:contient les informations principales de la playlist (duree, type et nom de la playlist).
+    @param playlist: contient un ensemble de morceaux qui correspond a la demande de l'utilisateur. 
+    '''
 
     #On initialise un compteur
     i=1
