@@ -11,7 +11,7 @@ Documentation Utilisateur
 ###Présentation
 > L'application permet de généré une playlist selon les choix musicaux voulus. Elle fonctionne à partir d'un terminal.
 
-![GitHub Logo](https://raw.githubusercontent.com/StephBlondeau/Generateur_Playlist/documentation/docs/docs/img/playlist_1.png)
+![Generation d'une playlist](https://raw.githubusercontent.com/StephBlondeau/Generateur_Playlist/documentation/docs/img/playlist_1.png)
 
 
 ###Saisie Argument(s)
