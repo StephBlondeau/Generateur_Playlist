@@ -4,3 +4,4 @@ pages:
 - [index.md, Accueil]
 - [tech.md, Technique]
 - [util.md, Utilisateur]
+theme: readthedocs
