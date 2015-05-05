@@ -22,15 +22,12 @@ def convertionInt (quantity):
     @param quantity: nombre saisie par l'utilisateur pour un argument.
     @return la valeur en entier naturel.
     '''
-
+    
     #On essais de convertir le format de la saisie en entier
     try:
+        goodQte = int(quantity)
         #Convertion de la saisie
-        if int(quantity):
-            logging.info("Un entier a bien ete saisie.")
-            goodQte = int(quantity)
-        else :
-            logging.info("La saisie n'a pas pu etre convertie en entier.")
+        logging.info("Un entier a bien ete saisie.")
             
     except ValueError:
         logging.error("Erreur de conversion,la saisie est une chaine.")
@@ -92,7 +89,7 @@ def pourcentages (pourcentage):
         logging.info("Le programme a mis les pourcentages proportionnel a leur nombre car le pourcentage total n'etait pas de 100.")
     
     else:
-        proportion = 0
+        proportion = 1
         
     
     return proportion
@@ -107,7 +104,7 @@ def conversionMinutes(ArgumentEntier):
     Conversion = int (argumentsParser.duree_playlist*ArgumentEntier/100)
     return Conversion
 
-def remettreEchelle(ListeArg, echelle):
+def remettreEchelle(listTArg, echelle):
    
     '''
     Selon le pourcentage va remettre a l'echelle toute les valeurs des arguments
@@ -117,13 +114,13 @@ def remettreEchelle(ListeArg, echelle):
     '''
     
     #Pour chaque élements de la liste on fait une mise a l'echelle de la quantite
-    for arg in ListeArg:
+    for arg in listTArg:
         #mise a l'echelle
         arg[1] = round(arg[1] * echelle)
         #conversion en minutes
         arg[1] = conversionMinutes(arg[1])
          
-    return ListeArg
+    return listTArg
 
 def verifArgument():
     '''
@@ -131,12 +128,18 @@ def verifArgument():
     @return une liste de liste 
     '''
     #On va vérifié s"il y a des arguments optionnel utilisés a partir de ceux qui sont possible
-    
     #Liste des arguments du programme
     Attributs = ['g','ar','sg','alb','t']
     
-    #Initialisation de la playlist
-    ListeArg = ""
+    #on va vérifier que la duree de la playlist est superieur a 0
+    if argumentsParser.duree_playlist <= 0:
+        logging.error("La duree de la playlist saisie est 0")
+        print("Erreur la duree de la playlist ne peut pas être de 0.")
+        exit(4) 
+    
+    #Initialisation des liste
+    ListeArg   = list() # liste de depart qui contient tout les tuples d'un argument
+    listTArg   = list() # liste final de l'ensemble de tout les tuples de tout les argument
     
     #On initialise le pourcentage total de la playlist
     pourcentageTotal = 0
@@ -150,8 +153,9 @@ def verifArgument():
 
             #Si le trouve on le range dans une variable de type liste de liste (liste de tuple d'argument)
             ListeArg  = getattr(argumentsParser, arg)
+    
             #On enregistre dans le fichier logging l'information
-            logging.info("L'option "+arg+" est bien present.")
+            logging.info("L'option " + arg + " est bien present.")
     
             #Tant qu'il y a plusieurs des tuples pour un argument trouve
             while i < len(ListeArg):
@@ -160,15 +164,14 @@ def verifArgument():
                 try:
                     #On va donner la saisie a une fonction pour la verifier'''
                     argVerif = convertionInt(ListeArg[i][1]) #Exemple: on prend la valeur 34 de ("Rock", 34)
-                    
+
                     #On rentre la saisie dans une variable qui totalise les pourcentages saisies
                     pourcentageTotal += argVerif
                     
                     #On remplace la saisir de l'utilisateur par un entier correcte s'il ne l'est pas deja
                     if (ListeArg[i][1] != 100):                       
                         ListeArg[i][1] = argVerif
-                    
-                    i = i+1 #Incrementation du compteur de tuple
+                        
     
                 except Exception:
                     logging.error("La fonction de verification d'un entier n'a pas fonctionner")
@@ -187,24 +190,36 @@ def verifArgument():
                         #On quitte le programme
                         exit(4)
                             
-                except Exception:
+                except Exception:         
                     logging.error("La verification de la saisie dans la base de donnée n'a pas pu se faire.")
 
+                listTuple = list() # liste qui contient un tuple correcte
+                # On range le tuple d'argument (ex: (Rock, 20, g)
+                listTuple.append(ListeArg[i][0])
+                listTuple.append(ListeArg[i][1])
+                
+                listTuple.append(arg)
+                
+                # On range la liste du tuple dans une autre liste
+                listTArg .append(listTuple)
+
+                i = i+1 #Incrementation du compteur de tuple
+        
         #Si l'argument n'a pas ete trouve dans l'argumentParser
         else:
-            logging.info("L'option "+ arg +" n'est pas presente.")
+            logging.info("L'option " + arg + " n'est pas presente.")
      
     #On va faire une remise a l'echelle selon le pourcentage 
     # roud() permet de faire un arrondie
     # pourcentages est une fonction qui va retourner une proportion a appliqué a la remise a l'echelle
     try :
-        ListeArg = remettreEchelle(ListeArg, round(pourcentages(pourcentageTotal),2))
+        listTArg = remettreEchelle(listTArg, round(pourcentages(pourcentageTotal),2))
         logging.info("Mise a l'echelle reussie.")
         
     except Exception :
         logging.error("Erreur dans la mise l'echelle")
-    
-    return ListeArg  
+
+    return listTArg 
 
 def Veriff (Attributs):
     '''
@@ -299,7 +314,7 @@ def Veriff (Attributs):
                     ListeArg = getattr(argumentsParser, args)
 
                     #On initialise un compteur d'argument par option
-                    i=0
+                    i = 0
                     #Tant qu'il y a plusieurs tuples dans un argument
                     while i < len(ListeArg):
                         #On recupere le premier tuple
@@ -323,5 +338,5 @@ def Veriff (Attributs):
                             logging.error("Le remplacement de la valeur entier n'a pas pu se faire.")
                             exit(4)
                         #On incremente le i
-                        i=i+1
+                        i = i+1
     return trouveArg             

@@ -64,6 +64,73 @@ def verificationChoisi(selection, arg):
         #On retourne false car il n'existe pas
         return False
 
+
+def filtrerListe(listeFinale, listeAFiltrer, quantiteEscomptee):
+        '''
+        Permet de choisir dans la liste de morceaux ceux qui va correspondre a la duree demande
+        @param listeFinale: liste final correspondant à la quantite de morceaux voulus
+        @param listeAFiltrer: la liste de morceaux de depart qui correspond à un argument
+        @return: la listeFinale  
+        '''
+    
+        #Si la quantite demander est superieur a 0
+        if quantiteEscomptee > 0:
+            #On range le dernier morceaux de la playlist dans la liste final et on la supprime de l'ensemble
+            morceauChoisi = listeAFiltrer[0]
+            #On remelange la liste a filtrer
+            random.shuffle(listeAFiltrer)
+            #On l'ajout a la playlist final
+            listeFinale.append(morceauChoisi)
+            #On decrément la quantite du morceaux ajoute au total de la quantiter voulue
+            quantiteEscomptee -= morceauChoisi.duree
+            #On rappel la fonction avec une diminution des parametres
+            filtrerListe(listeFinale, listeAFiltrer, quantiteEscomptee)
+        else:
+            return listeFinale
+        
+#Module qui permet de recuperer une liste de morceaux selon les arguments de la commande
+def recuperationMorceaux(ListeArg):
+    '''
+    Fonction qui permet de recuperer une liste de morceaux selon les arguments de la ligne de commande
+    @param argumentsParser: arguments saisie dans la ligne de commande
+    @param existe: boolean qui permet de savoir s'il y a des arguments optionnels ou non
+    @return une liste de liste qui contiendra l'ensemble des morceaux voulus pour chaque argument
+    '''
+    
+    #On creer une liste de liste
+    collectionListesFiltrees = list()
+
+    # On regarde si la liste d'argument recuperer est non vide
+    if ListeArg != "":
+        
+        for arg in ListeArg: # on parcourt tout les arguments saisies
+            
+            playList = rechercheBase(Attributs, arg[0], arg[2]) # ex : arg[0] = Rock et arg[2] = g
+            
+            #On applique la fonction de selection morceaux (ex : arg[1] = 20)
+            final = filtrerListe(collectionListesFiltrees, playList, arg[1] * argumentsParser.duree_playlist / 100 * 60)
+            
+            if (final is not None):
+                #on passe en parametre la quantite à garder à l'interieur de la sous playlist
+                collectionListesFiltrees.append(final)
+                
+    else:
+        print("Ici je n'ai pas d'argument")
+    #S'il n'y a pas d'arguments optionnels
+        try:
+            #on recupere l'ensemble des morceaux de la base de donnees
+            playList = list(connexion.execute(sqlalchemy.select([mes_morceaux])))
+            #On applique la fonction de selection morceaux
+            final = filtrerListe(collectionListesFiltrees, playList, argumentsParser.duree_playlist * 60)
+        except Exception:
+            logging.error("Le programme n'a pas pu recuperer une liste de morceaux")
+
+        if (final is not None):
+            #on passe en parametre la quantite à garder à l'interieur de la sous playlist
+            collectionListesFiltrees.append(final)
+
+    return collectionListesFiltrees
+        
 #Module qui permet de recuperer une liste de morceaux selon les arguments de la commande
 def recuperationDonnees(argumentsParser, existe):
     '''
@@ -73,37 +140,11 @@ def recuperationDonnees(argumentsParser, existe):
     @return une liste de liste qui contiendra l'ensemble des morceaux voulus pour chaque argument
     '''
 
-    def filtrerListe(listeFinale, listeAFiltrer, quantiteEscomptee):
-        '''
-        Permet de choisir dans la liste de morceaux ceux qui va correspondre a la duree demande
-        @param listeFinale: liste final correspondant à la quantite de morceaux voulus
-        @param listeAFiltrer: la liste de morceaux de depart qui correspond à un argument
-        @return: la listeFinale  
-        '''
-
-        #Si la quantite demander est superieur a 0
-        if quantiteEscomptee > 0:
-            #On range le dernier morceaux de la playlist dans la liste final et on la supprime de l'ensemble
-            morceauChoisi = listeAFiltrer[0]
-
-            #On remelange la liste a filtrer
-            random.shuffle(listeAFiltrer)
-
-            #On l'ajout a la playlist final
-            listeFinale.append(morceauChoisi)
-
-            #On decrément la quantite du morceaux ajoute au total de la quantiter voulue
-            quantiteEscomptee -= morceauChoisi.duree
-            #On rappel la fonction avec une diminution des parametres
-            filtrerListe(listeFinale, listeAFiltrer, quantiteEscomptee)
-        else:
-            return listeFinale
-
     #On creer une liste de liste
     collectionListesFiltrees = list()
 
     #Initialisation d'un compteur
-    i=0
+    i = 0
 
     while (i < len(Attributs)):
 
@@ -112,13 +153,14 @@ def recuperationDonnees(argumentsParser, existe):
             #On parcourt l'ensemble d'un attribut
             for unArgument in getattr(argumentsParser, Attributs[i][0]):
                 playList = rechercheBase(Attributs, unArgument[0], Attributs[i][0])
+                
                 #On applique la fonction de selection morceaux
                 final = filtrerListe(collectionListesFiltrees, playList, unArgument[1] * argumentsParser.duree_playlist / 100 * 60)
 
                 if (final is not None):
                     #on passe en parametre la quantite à garder à l'interieur de la sous playlist
                     collectionListesFiltrees.append(final)
-        i+=1
+        i += 1
 
     #S'il n'y a pas d'arguments optionnels
     if existe == False:

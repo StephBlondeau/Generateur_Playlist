@@ -70,14 +70,32 @@ Chacun de ses arguments attends 2 parametres
 #### Pour les arguments optionnels :
 > 
 * Si on ne saisie aucun paramètre optionnel
+>> Ex: --g --ar --t etc ... La playlist sera généré avec des morceaux de musique de tout les genres, sélectionnés aléatoirement.
 * Si on saisie un paramètre optionnel mais sanq la quantité ou le nom de l'argument voulue
+>> Ex: --g Rock --g 34 La playlist ne sera pas généré et un message d'erreur sera affiché à l'utilisateur.
 * Si on saisie un paramètre optionnel avec un quantité et un argument qui n'existe pas dans la base
+>> Ex: --g Rack 34 La playlist ne sera pas généré et un message d'erreur sera affiché à l'utilisateur.
 
 #### Pour la durée de la playlist :
 
 > 
 * Si la durée de la playlist est supérieur à l'ensemble des quantités des arguments optionnels
+>> Ex: Durée Playlist = 450 et --g Rock 80 --g Rap 80 (=160) On remet le tout en base 100 en gardant la proportion des arguments voulus.
 * Si la durée de la playlist est inférieur à l'ensemble des quantités des arguments optionnels
+>> Ex: Durée Playlist = 100 et --g Roc  20 --g Rap 10 (=30) On remet le tout en base 100 en gardant la proportion des arguments voulus.
 * Si la durée de la playlist est de 0
+>> Ex : Durée Playlist = 0 alors le programme envoie un message d'erreur
+
+#### La saisie du pourcentage d'argument
+
+>
+* Si on saisie un nombre décimal
+>> L'application va le convertir en entier
+* Si on saisie un nombre négatif
+>> L'application va le convertir en entier naturel 
+* Si on saisie 0 pour un argument
+>> L'application envoie un message d'erreur
+
+### Etapes du programmes
 
 
