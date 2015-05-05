@@ -1,1 +1,6 @@
-site_name: My Docs
+site_name: Documentations Playlist
+repo_url : https://github.com/StephBlondeau/Generateur_Playlist/
+pages:
+- [index.md, Accueil]
+- [tech.md, Technique]
+- [util.md, Utilisateur]
