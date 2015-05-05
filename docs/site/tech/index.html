@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>Technique - Documentations Playlist</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Documentations Playlist</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Accueil</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Technique</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../util/">Utilisateur</a>
+                    </li>
+                
+                
+                </ul>
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <li >
+                    <a rel="next" href="..">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../util/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a href="https://github.com/StephBlondeau/Generateur_Playlist/">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#documentation-technique">Documentation Technique</a></li>
+        
+            <li><a href="#sommaire">Sommaire</a></li>
+        
+            <li><a href="#contexte-de-lapplication">Contexte de l'application</a></li>
+        
+            <li><a href="#environnement-de-developpement">Environnement de developpement</a></li>
+        
+            <li><a href="#arguments-de-la-ligne-de-commande">Arguments de la ligne de Commande</a></li>
+        
+            <li><a href="#regles-de-gestion-des-arguments-de-la-ligne-de-commande">Règles de gestion des arguments de la ligne de commande</a></li>
+        
+            <li><a href="#etapes-du-programmes">Etapes du programmes</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="documentation-technique">Documentation Technique</h1>
+<h3 id="sommaire">Sommaire</h3>
+<ul>
+<li>Contexte de l'application</li>
+<li>Environnement du projet</li>
+<li>Arguments de la ligne de commande</li>
+<li>Modules python</li>
+<li>Régles de gestion</li>
+</ul>
+<h3 id="contexte-de-lapplication">Contexte de l'application</h3>
+<blockquote>
+<p>La section BTS SIO du Lycée André Malraux gère, maintient et anime la Radio Libre de
+l’établissement. La nature des morceaux qui sont écoutés par les auditeurs provient du travail du programmateur radio dont la responsabilité est de concevoir l’enchaînement musical diffusé.</p>
+<p>Pour cela, le programmateur radio doit créer des playlist en plusieurs formats. Nous avons
+donc créé un outil de génération de playlist musicale pour lui faciliter le travail. L’insertion des morceaux est donc rendu plus rapide dans la playlist puisqu’ils étaient à l’origine ajoutés à la main. </p>
+</blockquote>
+<h3 id="environnement-de-developpement">Environnement de developpement</h3>
+<blockquote></blockquote>
+<h4 id="systeme-dexploitation">Système d'exploitation :</h4>
+<blockquote>
+<p>GNU/Linux </p>
+</blockquote>
+<h4 id="langage">Langage :</h4>
+<blockquote>
+<p>Python et interprété avec Python3</p>
+</blockquote>
+<h4 id="methode-de-conception">Méthode de conception :</h4>
+<blockquote>
+<p>Programmation Orientée Objet.</p>
+</blockquote>
+<h4 id="langage-de-requetage">Langage de requêtage :</h4>
+<blockquote>
+<p>SQL.</p>
+</blockquote>
+<h4 id="sgbdstockage-des-donnees">SGBD/Stockage des données :</h4>
+<blockquote>
+<p>PostgreSql</p>
+</blockquote>
+<h4 id="bibliotheques">Bibliothèques :</h4>
+<blockquote>
+<p>lxml pour la sortie en XSPF, sqlAlchemy pour l’accès au stockage de données avec PgSql, argparse  pour la gestion des arguments de la ligne de commande,</p>
+</blockquote>
+<h4 id="documentation-technique_1">Documentation technique :</h4>
+<blockquote>
+<ul>
+<li>une page de manuel rédigée en Markdown et convertie en manpage à l’aide de readTheDocs , contenant alors la documentation détaillée du fonctionnement du programme,</li>
+</ul>
+</blockquote>
+<h4 id="documentation-utilisateur">Documentation utilisateur :</h4>
+<blockquote>
+<ul>
+<li>l’affichage d’une documentation succinte rappelant les différentes options disponibles pour le programme, appelée à l’aide de l’option --help en paramètre de la ligne de commande,</li>
+<li>une page de manuel rédigée en Markdown et convertie en manpage à l’aide de readTheDocs , contenant alors la documentation détaillée de l’utilisation du programme,</li>
+<li>une version HTML de la documentation issue de la page de manuel ,</li>
+<li>une version PDF de la documentation issue de la page de manuel .</li>
+</ul>
+</blockquote>
+<h3 id="arguments-de-la-ligne-de-commande">Arguments de la ligne de Commande</h3>
+<blockquote></blockquote>
+<h4 id="obligatoires">Obligatoires :</h4>
+<table>
+<thead>
+<tr>
+<th>Nom</th>
+<th>Utilité</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>durre_playlist</td>
+<td>Indique la durée en minutes voulu pourla playlist</td>
+<td>120</td>
+</tr>
+<tr>
+<td>type_playlist</td>
+<td>Indique le type de sortie de la playlist</td>
+<td>m3u, xspf ou pls</td>
+</tr>
+<tr>
+<td>nom_playlist</td>
+<td>Le nom du fichier de sortie créé</td>
+<td>nom_playlist</td>
+</tr>
+</tbody>
+</table>
+<h4 id="optionnels">Optionnels :</h4>
+<p>Chacun de ses arguments attends 2 parametres </p>
+<table>
+<thead>
+<tr>
+<th>Raccourcie</th>
+<th>Nom</th>
+<th>Utilité</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>--help</strong></td>
+<td>Help</td>
+<td>Affichage d'un message d'aide</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>--g</strong></td>
+<td>Genre</td>
+<td>Indique le genre de musique voulue</td>
+<td>--g Rock 120</td>
+</tr>
+<tr>
+<td><strong>--ar</strong></td>
+<td>Artiste</td>
+<td>Indique le nom d'un artiste</td>
+<td>--ar Indochine 25</td>
+</tr>
+<tr>
+<td><strong>--alb</strong></td>
+<td>Album</td>
+<td>Indique le titre d'un album</td>
+<td>--alb Matin 25</td>
+</tr>
+<tr>
+<td><strong>--t</strong></td>
+<td>Titre</td>
+<td>Indique le titre d'un morceau</td>
+<td>--t Debut 124</td>
+</tr>
+<tr>
+<td><strong>--sg</strong></td>
+<td>Sous-genre</td>
+<td>Indique le sous-genre de musique voulue</td>
+<td>--sg Rap 76</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><em>Les arguments sont donc composés d'une chaîne et ensuite d'une quantité (en pourcentage).</em></p>
+</blockquote>
+<h3 id="regles-de-gestion-des-arguments-de-la-ligne-de-commande">Règles de gestion des arguments de la ligne de commande</h3>
+<blockquote></blockquote>
+<h4 id="pour-les-arguments-optionnels">Pour les arguments optionnels :</h4>
+<blockquote>
+<ul>
+<li>Si on ne saisie aucun paramètre optionnel<blockquote>
+<p>Ex: --g --ar --t etc ... La playlist sera généré avec des morceaux de musique de tout les genres, sélectionnés aléatoirement.</p>
+</blockquote>
+</li>
+<li>Si on saisie un paramètre optionnel mais sanq la quantité ou le nom de l'argument voulue<blockquote>
+<p>Ex: --g Rock --g 34 La playlist ne sera pas généré et un message d'erreur sera affiché à l'utilisateur.</p>
+</blockquote>
+</li>
+<li>Si on saisie un paramètre optionnel avec un quantité et un argument qui n'existe pas dans la base<blockquote>
+<p>Ex: --g Rack 34 La playlist ne sera pas généré et un message d'erreur sera affiché à l'utilisateur.</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<h4 id="pour-la-duree-de-la-playlist">Pour la durée de la playlist :</h4>
+<blockquote>
+<ul>
+<li>Si la durée de la playlist est supérieur à l'ensemble des quantités des arguments optionnels<blockquote>
+<p>Ex: Durée Playlist = 450 et --g Rock 80 --g Rap 80 (=160) On remet le tout en base 100 en gardant la proportion des arguments voulus.</p>
+</blockquote>
+</li>
+<li>Si la durée de la playlist est inférieur à l'ensemble des quantités des arguments optionnels<blockquote>
+<p>Ex: Durée Playlist = 100 et --g Roc  20 --g Rap 10 (=30) On remet le tout en base 100 en gardant la proportion des arguments voulus.</p>
+</blockquote>
+</li>
+<li>Si la durée de la playlist est de 0<blockquote>
+<p>Ex : Durée Playlist = 0 alors le programme envoie un message d'erreur</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<h4 id="la-saisie-du-pourcentage-dargument">La saisie du pourcentage d'argument</h4>
+<blockquote>
+<ul>
+<li>Si on saisie un nombre décimal<blockquote>
+<p>L'application va le convertir en entier</p>
+</blockquote>
+</li>
+<li>Si on saisie un nombre négatif<blockquote>
+<p>L'application va le convertir en entier naturel </p>
+</blockquote>
+</li>
+<li>Si on saisie 0 pour un argument<blockquote>
+<p>L'application envoie un message d'erreur</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<h3 id="etapes-du-programmes">Etapes du programmes</h3></div>
+            
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script src="../js/base.js"></script>
+
+        <!--
+        MkDocs version  : 0.12.2
+        Docs Build Date : 2015-05-05 13:09:07.330826
+        -->
+    </body>
+</html>

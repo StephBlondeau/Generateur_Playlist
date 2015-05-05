@@ -33,8 +33,7 @@ donc créé un outil de génération de playlist musicale pour lui faciliter le 
 > lxml pour la sortie en XSPF, sqlAlchemy pour l’accès au stockage de données avec PgSql, argparse  pour la gestion des arguments de la ligne de commande,
 ####Documentation technique : 
 > 
-* Intégrée en PyDoc pour Python et rédigé sur un document PDF.
-* une page de manuel rédigée en Markdown et convertie en manpage à l’aide de readTheDocs , contenant alors la documentation détaillée de l’utilisation du programme,
+* une page de manuel rédigée en Markdown et convertie en manpage à l’aide de readTheDocs , contenant alors la documentation détaillée du fonctionnement du programme,
 ####Documentation utilisateur :
 > 
 * l’affichage d’une documentation succinte rappelant les différentes options disponibles pour le programme, appelée à l’aide de l’option --help en paramètre de la ligne de commande,
@@ -97,4 +96,5 @@ Chacun de ses arguments attends 2 parametres
 >> L'application envoie un message d'erreur
 
 ### Etapes du programmes
+
 
